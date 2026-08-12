@@ -1,299 +1,813 @@
 <!DOCTYPE HTML>
 <html lang="en">
-
 <head>
-    <title>Lesedi Chuene Portfolio</title>
+    <title>Lesedi Chuene | Software Engineering Portfolio</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Lesedi Chuene's software engineering portfolio featuring web, mobile and database projects." />
 
     <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-	
-	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-          integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    
-	<style>
-	
-		/* Global styles */
-		* {
-			box-sizing: border-box;
-		}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-		body {
-			padding: 20px;
-			background-color: #f9fafb; /* light gray background */
-			font-family: Arial, sans-serif;
-		}
-
-		/* Header styling - full width */
-		.site-header {
-			background-color: #f5aaf9;
-			color: white;
-			padding: 1rem 0;
-			margin: -20px -20px 0 -20px; /* Remove body padding so header spans full width */
-		}
-
-		/* Nav links */
-		.nav-links {
-			display: flex;
-			justify-content: center;
-			gap: 2rem;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		.nav-links a {
-			color: white;
-			text-decoration: none;
-			font-weight: 500;
-		}
-
-		.nav-links a:hover {
-			text-decoration: underline;
-		}
-
-		/* Home section layout */
-		#top {
-			margin-top: 2rem; /* Space between header and picture/name */
-		}
-
-		#top .container {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 1rem;
-		}
-
-		#top .image.fit img {
-			width: 100%;
-			height: auto;
-			border-radius: 0.5rem;
-		}
-
-		#top header h1 {
-			font-size: 2rem;
-			margin-bottom: 0.5rem;
-		}
-
-		/* Contact box smaller */
-		#contact .contact-box {
-			max-width: 500px;
-			margin: auto;
-		}
-
-		/* Find me on section adjustments */
-		#contact h3 {
-			margin-bottom: 0.25rem; /* reduce space under heading */
-		}
-
-        #top .profile-pic {
-            width: 200px;        /* adjust size as needed */
-            height: 200px;
-            border-radius: 50%;  /* makes it round */
-            object-fit: cover;   /* fit image inside circle */
-            background-color: white; /* white background behind the picture */
-            padding: 10px;       /* space around image */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* subtle shadow */
+    <style>
+        :root {
+            --pink: #f5aaf9;
+            --pink-strong: #f585fa;
+            --pink-dark: #d96ee0;
+            --pink-soft: #fdf1fe;
+            --ink: #252525;
+            --muted: #6b7280;
+            --surface: #ffffff;
+            --background: #f9fafb;
+            --border: #eee4ef;
         }
 
-        /* Project images */
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        a { transition: all .25s ease; }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(245, 170, 249, .94);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(90, 45, 95, .08);
+        }
+
+        .nav-link {
+            position: relative;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            padding: .45rem .25rem;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 100%;
+            bottom: 0;
+            height: 2px;
+            background: white;
+            transition: right .25s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after { right: 0; }
+
+        .section-card {
+            background: var(--surface);
+            border: 1px solid rgba(238, 228, 239, .9);
+            border-radius: 1.25rem;
+            box-shadow: 0 12px 35px rgba(70, 40, 75, .06);
+        }
+
+        .pink-text { color: var(--pink-strong); }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--pink-dark);
+            background: var(--pink-soft);
+            border: 1px solid #f7d8f8;
+            border-radius: 999px;
+            padding: .4rem .75rem;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .02em;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 7vw, 4rem);
+            line-height: 1.02;
+            letter-spacing: -.04em;
+        }
+
+        .hero-name { color: var(--pink-dark); }
+
+        .gradient-line {
+            width: 80px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--pink-strong), var(--pink));
+        }
+
+        .profile-pic {
+            width: 210px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 50%;
+            background: white;
+            padding: 9px;
+            border: 2px solid #f8d5fa;
+            box-shadow: 0 18px 45px rgba(245, 133, 250, .22);
+        }
+
+        .profile-wrap {
+            position: relative;
+            display: inline-flex;
+            padding: 12px;
+        }
+
+        .profile-wrap::before,
+        .profile-wrap::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid #f6c9f8;
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+
+        .profile-wrap::before { inset: 0; }
+        .profile-wrap::after { inset: 24px; animation-delay: 1s; }
+
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(.96); opacity: .35; }
+            50% { transform: scale(1.03); opacity: .9; }
+        }
+
+        .tech-orbit {
+            position: absolute;
+            inset: -25px;
+            pointer-events: none;
+        }
+
+        .tech-badge {
+            position: absolute;
+            background: white;
+            color: #555;
+            border: 1px solid #f0d9f1;
+            box-shadow: 0 8px 20px rgba(70, 40, 75, .08);
+            border-radius: 999px;
+            padding: .35rem .65rem;
+            font-size: .72rem;
+            font-weight: 700;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .tech-badge:nth-child(1) { top: 5%; left: -5%; }
+        .tech-badge:nth-child(2) { top: 18%; right: -12%; animation-delay: .7s; }
+        .tech-badge:nth-child(3) { bottom: 10%; left: -14%; animation-delay: 1.2s; }
+        .tech-badge:nth-child(4) { bottom: 0; right: 0; animation-delay: 1.8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
+        }
+
+        .terminal {
+            background: #fff;
+            border: 1px solid #eadbea;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: 0 22px 55px rgba(70, 40, 75, .10);
+        }
+
+        .terminal-bar {
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            padding: .7rem 1rem;
+            background: #faf7fb;
+            border-bottom: 1px solid #eee6ef;
+        }
+
+        .terminal-dot { width: 9px; height: 9px; border-radius: 50%; background: #ddd; }
+
+        .terminal-body {
+            padding: 1.2rem;
+            font-family: Consolas, Monaco, monospace;
+            font-size: .9rem;
+            line-height: 1.8;
+            color: #4b4b4b;
+        }
+
+        .terminal-prompt { color: var(--pink-dark); }
+        .cursor {
+            display: inline-block;
+            width: 7px;
+            height: 1rem;
+            background: var(--pink-strong);
+            vertical-align: -2px;
+            animation: blink .9s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--pink);
+            color: white;
+            padding: .75rem 1.1rem;
+            border-radius: .75rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(245, 170, 249, .28);
+        }
+
+        .cta-primary:hover { background: var(--pink-dark); transform: translateY(-2px); }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: white;
+            color: #555;
+            padding: .75rem 1.1rem;
+            border: 1px solid #eadfea;
+            border-radius: .75rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .cta-secondary:hover { border-color: var(--pink); color: var(--pink-dark); transform: translateY(-2px); }
+
+        .skill-group {
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            background: linear-gradient(145deg, #fff, #fffafd);
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+        }
+
+        .skill-group:hover {
+            transform: translateY(-4px);
+            border-color: #f3c9f5;
+            box-shadow: 0 14px 30px rgba(70, 40, 75, .07);
+        }
+
+        .skill-pill {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #edddec;
+            background: #fff;
+            border-radius: 999px;
+            padding: .35rem .65rem;
+            font-size: .78rem;
+            font-weight: 600;
+            color: #5b5b5b;
+            margin: .2rem;
+        }
+
+        .filter-btn {
+            border: 1px solid #eadfea;
+            background: white;
+            color: #666;
+            border-radius: 999px;
+            padding: .45rem .85rem;
+            font-size: .8rem;
+            font-weight: 700;
+            transition: all .2s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--pink);
+            color: white;
+            border-color: var(--pink);
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(70, 40, 75, .055);
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 42px rgba(70, 40, 75, .11);
+            border-color: #f1c8f3;
+        }
+
+        .project-image-wrap {
+            height: 210px;
+            overflow: hidden;
+            background: #fff;
+        }
+
         .project-img {
             width: 100%;
-            height: 200px;       /* fixed height for uniformity */
+            height: 100%;
             object-fit: cover;
-            border-radius: 0.75rem;
-            background-color: white;
-            padding: 5px;
+            transition: transform .45s ease;
         }
 
-		/* Social links styling */
-		.social {
-			list-style: none;
-			padding: 0;
-		}
+        .project-card:hover .project-img { transform: scale(1.04); }
 
-		.social li {
-			margin-bottom: 0.3rem; /* reduced space between links */
-		}
+        .project-body { padding: 1.25rem; }
 
-		.social a {
-			text-decoration: none;
-		}
-
-		.social a:hover {
-			text-decoration: underline;
-		}
-		
-		/* Contact adjustments */
-        #contact .contact-box {
-            max-width: 500px;
-            margin: 0; /* align left */
+        .project-tag {
+            display: inline-block;
+            padding: .28rem .55rem;
+            border-radius: 999px;
+            background: var(--pink-soft);
+            color: var(--pink-dark);
+            font-size: .7rem;
+            font-weight: 700;
         }
-        #contact h3 { margin-bottom: 0.25rem; }
-        .social { list-style: none; padding: 0; }
-        .social li { margin-bottom: 0.3rem; }
-        .social a { color: #ed59f5; text-decoration: none; font-weight: 500; }
-        .social a:hover { text-decoration: underline; }
-        .social i { margin-right: 0.5rem; } /* space between icon and text */
 
-	</style>
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            color: var(--pink-dark);
+            font-weight: 700;
+            font-size: .82rem;
+            text-decoration: none;
+        }
+
+        .project-link:hover { gap: .55rem; }
+
+        .process-card {
+            position: relative;
+            padding: 1.15rem;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            background: white;
+            transition: transform .25s ease;
+        }
+
+        .process-card:hover { transform: translateY(-4px); }
+
+        .process-number {
+            display: inline-flex;
+            width: 34px;
+            height: 34px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--pink-soft);
+            color: var(--pink-dark);
+            font-weight: 800;
+            font-size: .8rem;
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 1.5rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #f0d8f2;
+        }
+
+        .timeline-item {
+            position: relative;
+            display: flex;
+            gap: 1rem;
+            padding-bottom: 1.4rem;
+        }
+
+        .timeline-dot {
+            position: relative;
+            z-index: 2;
+            flex: 0 0 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--pink);
+            box-shadow: 0 0 0 5px #fdf3fd;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: .9rem;
+            padding: 1rem;
+        }
+
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            color: #666;
+            font-size: .75rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: #8dd8a2;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px #eaf8ee;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .mobile-menu { display: none; }
+
+        @media (max-width: 767px) {
+            .desktop-nav { display: none; }
+            .mobile-menu { display: block; }
+            .tech-orbit { display: none; }
+            .hero-title { font-size: 2.65rem; }
+            .profile-pic { width: 175px; height: 175px; }
+            .project-image-wrap { height: 190px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
 </head>
 
-<body class="is-preload">
-
-    <!-- Header / Nav -->
+<body>
+    <!-- Navigation -->
     <header class="site-header">
-        <nav>
-            <ul class="nav-links">
-                <li><a href="mailto:chuenelesedi8@gmail.com">Email</a></li>
-                <li><a href="https://linkedin.com/in/lesedi-chuene">LinkedIn</a></li>
-                <li><a href="https://github.com/caffeine-and-chocolate">GitHub</a></li>
-            </ul>
+        <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+            <a href="#top" class="text-white font-extrabold tracking-wide text-lg no-underline">LC.</a>
+
+            <nav class="desktop-nav flex items-center gap-6" aria-label="Main navigation">
+                <a class="nav-link active" href="#top">Home</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#skills">Skills</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#journey">Journey</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </nav>
+
+            <button id="menuBtn" class="mobile-menu text-white text-xl" aria-label="Open menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav id="mobileNav" class="hidden px-5 pb-4" aria-label="Mobile navigation">
+            <div class="grid gap-2">
+                <a class="nav-link" href="#top">Home</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#skills">Skills</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#journey">Journey</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
         </nav>
     </header>
 
-    <!-- Home -->
-    <article id="top" class="bg-white p-6 md:p-10 rounded-2xl shadow-lg mt-6">
-	  <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
-		
-		<!-- Left column: picture -->
-		<!-- Left column: picture -->
-        <div class="w-full md:w-1/3 flex justify-center md:justify-start">
-            <img src="IMG_9831.JPG" alt="Lesedi Chuene" class="profile-pic">
-        </div>
+    <main class="max-w-6xl mx-auto px-5">
+        <!-- Hero -->
+        <section id="top" class="py-12 md:py-20 reveal">
+            <div class="section-card p-7 md:p-12 overflow-hidden">
+                <div class="grid md:grid-cols-5 gap-10 items-center">
+                    <div class="md:col-span-3">
+                        <span class="eyebrow"><span class="status-dot"></span> Open to graduate & junior opportunities</span>
+                        <h1 class="hero-title font-bold mt-5">Hi, I'm <span class="hero-name">Lesedi Chuene</span>.</h1>
+                        <div class="mt-5 flex items-center gap-3">
+                            <div class="gradient-line"></div>
+                            <p class="font-bold text-gray-600">Software Engineering Graduate · Honours Student</p>
+                        </div>
+                        <p class="mt-6 text-gray-600 text-lg leading-relaxed max-w-2xl">
+                            I build practical software, web applications and database-driven solutions, with a growing focus on 
+                            full-stack development, software architecture and reliable systems.
+                        </p>
 
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="skill-pill">Java</span>
+                            <span class="skill-pill">Python</span>
+                            <span class="skill-pill">JavaScript</span>
+                            <span class="skill-pill">PHP</span>
+                            <span class="skill-pill">SQL</span>
+                            <span class="skill-pill">PostgreSQL</span>
+                        </div>
 
-		<!-- Right column: name + paragraph -->
-		<div class="w-full md:w-2/3">
-		  <header>
-			<h1>Hi, I'm <strong>Lesedi Chuene</strong>.</h1>
-		  </header>
-		  <p class="text-gray-700 leading-relaxed mb-5">
-			I am a Software Engineering Honours student with hands-on experience having built full-stack web applications 
-			using JavaScript, PHP, HTML, CSS, and MySQL as well as an android mobile application using technologies such as 
-            JavaScript, XML and Kotlin. I enjoy coding, testing and widening my knowledge in tech.
-		  </p>
-		  <a href="#contact" class="px-6 py-3 font-semibold rounded-lg shadow transition duration-300"
-			 style="background-color:#f5aaf9; color:white;"
-			 onmouseover="this.style.backgroundColor='#e292e5'"
-			 onmouseout="this.style.backgroundColor='#f5aaf9'">
-			Get in Touch
-		  </a>
-		</div>
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <a href="#projects" class="cta-secondary"></i> View Projects</a>
+                            <a href="#contact" class="cta-secondary"></i> Get in Touch</a>
+                        </div>
+                    </div>
 
-	  </div>
-	</article>
-
-
-
-
-    <!-- About me -->
-    <section class="grid md:grid-cols-3 gap-8 py-8">
-        <article class="md:col-span-2 bg-white p-6 rounded-2xl shadow">
-            <h3 class="text-xl font-semibold" style="color:#f585fa;">About Me</h3>
-            <p class="mt-3 text-gray-600">
-                I am a Software Engineering enthusiast focused on building code solutions and full-stack development. For my final year 
-                project, I built a web application that connects local sellers with buyers in the informal economy of 
-                South Africa and also worked in a team to build an android mobile application that combined the ethical 
-                use of AI with learning how to code. I enjoy working in teams, writing clean code and learning new technologies.
-            </p>
-            <div class="mt-4 grid grid-cols-2 gap-3 text-sm text-gray-700">
-                <div><strong>Primary:</strong> Java, PHP, JavaScript, C++, Python.</div>
-                <div><strong>Databases:</strong> MySQL, PostgreSQL</div>
-                <div><strong>Tools:</strong> VS Code, IntelliJ, NetBeans, Android Studio, Jupyter Notebook</div>
+                    <div class="md:col-span-2">
+                        <div class="flex justify-center mb-8 md:mb-5">
+                            <div class="profile-wrap">
+                                <img src="IMG_9831.JPG" alt="Lesedi Chuene" class="profile-pic">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </article>
-    </section>
+        </section>
 
-    <!-- Projects -->
-    <section id="projects" class="py-8">
-        <h3 class="text-xl font-semibold" style="color:#f585fa;">Projects</h3>
-        <p>Here's some of the projects I have completed. Please click to visit the project websites or download the RITA app demo video.</p>
+        <!-- About -->
+        <section id="about" class="py-8 reveal">
+            <div class="grid lg:grid-cols-5 gap-6">
+                <article class="section-card p-7 lg:col-span-3">
+                    <h2 class="text-3xl font-extrabold mt-4">Building, learning and improving.</h2>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        I am a Software Engineering graduate currently pursuing a Bachelor of Science Honours in Software Engineering. 
+                        My development experience spans web applications, mobile applications and database-driven systems. I enjoy solving 
+                        problems, writing maintainable code, learning new technologies and turning requirements into practical software.
+                    </p>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Alongside development, I have experience assisting with university classes and supporting students with technical concepts. 
+                        This has strengthened my communication and teamwork skills while giving me a deeper appreciation for explaining and understanding 
+                        software concepts.
+                    </p>
+                </article>
 
-        <div class="mt-6 grid md:grid-cols-3 gap-6">
-            <article class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition">
-                <div class="h-36 rounded-lg bg-white overflow-hidden flex items-center justify-center">
-                    <img src="UH1.jpg" alt="Ubuntu Huis" class="project-img">
+                <aside class="section-card p-7 lg:col-span-2">
+                    <p class="eyebrow">Currently</p>
+                    <div class="mt-5 space-y-5">
+                        <div class="flex gap-4">
+                            <div class="text-pink-500 pt-1"><i class="fas fa-graduation-cap"></i></div>
+                            <div><h3 class="font-bold">BSc Honours</h3><p class="text-sm text-gray-500 mt-1">Software Engineering · In progress</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-pink-500 pt-1"><i class="fas fa-laptop-code"></i></div>
+                            <div><h3 class="font-bold">Building</h3><p class="text-sm text-gray-500 mt-1">Web applications, backend solutions and personal projects</p></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-pink-500 pt-1"><i class="fas fa-layer-group"></i></div>
+                            <div><h3 class="font-bold">Exploring</h3><p class="text-sm text-gray-500 mt-1">Microservices, backend architecture and Python</p></div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="py-12 reveal">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-extrabold mt-4">What I work with</h2>
+                <p class="mt-3 text-gray-600">A practical mix of programming, web, database and software engineering technologies.</p>
+            </div>
+
+            <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="skill-group">
+                    <div class="pink-text text-xl"><i class="fas fa-code"></i></div>
+                    <h3 class="font-bold mt-3">Languages</h3>
+                    <div class="mt-2"><span class="skill-pill">Java</span><span class="skill-pill">Python</span><span class="skill-pill">JavaScript</span><span class="skill-pill">PHP</span><span class="skill-pill">C++</span><span class="skill-pill">Kotlin</span></div>
+                </div>
+                <div class="skill-group">
+                    <div class="pink-text text-xl"><i class="fas fa-globe"></i></div>
+                    <h3 class="font-bold mt-3">Web & Backend</h3>
+                    <div class="mt-2"><span class="skill-pill">HTML</span><span class="skill-pill">CSS</span><span class="skill-pill">JavaScript</span><span class="skill-pill">PHP</span><span class="skill-pill">Java</span><span class="skill-pill">Kotlin</span></div>
+                </div>
+                <div class="skill-group">
+                    <div class="pink-text text-xl"><i class="fas fa-database"></i></div>
+                    <h3 class="font-bold mt-3">Databases</h3>
+                    <div class="mt-2"><span class="skill-pill">MySQL</span><span class="skill-pill">PostgreSQL</span><span class="skill-pill">SQL</span><span class="skill-pill">Database Design</span></div>
+                </div>
+                <div class="skill-group">
+                    <div class="pink-text text-xl"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <h3 class="font-bold mt-3">Tools</h3>
+                    <div class="mt-2"><span class="skill-pill">Git</span><span class="skill-pill">GitHub</span><span class="skill-pill">VS Code</span><span class="skill-pill">IntelliJ</span><span class="skill-pill">Android Studio</span><span class="skill-pill">Jupyter</span><span class="skill-pill">NetBeans</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engineering approach -->
+        <section class="py-10 reveal">
+            <div class="section-card p-7 md:p-9">
+                <div class="md:flex items-end justify-between gap-6">
+                    <div>
+                        <h2 class="text-3xl font-extrabold mt-4">From requirements to working software.</h2>
+                    </div>
+                    <p class="text-gray-500 max-w-md mt-4 md:mt-0">I approach projects as more than just coding exercises - understanding the problem, designing a solution and improving it are all part of the process.</p>
                 </div>
 
-                <h4 class="mt-4 font-semibold">Ubuntu Huis - Marketplace App</h4>
-                <p class="mt-2 text-sm text-gray-600">
-                    A web platform for the informal economy of South Africa with role-based access, 
-                    various products and services for sale and location and category filters for easy access and a better user experience. 
-                    Built with HTML, CSS, PHP, JavaScript, MySQL.
-                </p>
-                <div class="mt-4 flex items-center gap-3">
-                    <a href="https://github.com/caffeine-and-chocolate/ubuntu-huis-website" class="text-sm border px-3 py-1 rounded">Visit</a>
+                <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="process-card"><span class="process-number">01</span><h3 class="font-bold mt-3">Understand</h3><p class="text-sm text-gray-500 mt-2">Requirements, users and the problem.</p></div>
+                    <div class="process-card"><span class="process-number">02</span><h3 class="font-bold mt-3">Design</h3><p class="text-sm text-gray-500 mt-2">Structure, data and application flow.</p></div>
+                    <div class="process-card"><span class="process-number">03</span><h3 class="font-bold mt-3">Develop</h3><p class="text-sm text-gray-500 mt-2">Build practical and maintainable solutions.</p></div>
+                    <div class="process-card"><span class="process-number">04</span><h3 class="font-bold mt-3">Test</h3><p class="text-sm text-gray-500 mt-2">Debug, validate and improve.</p></div>
+                    <div class="process-card"><span class="process-number">05</span><h3 class="font-bold mt-3">Deploy</h3><p class="text-sm text-gray-500 mt-2">Make the solution available to users.</p></div>
                 </div>
-            </article>
+            </div>
+        </section>
 
-            <article class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition">
-                <div class="h-36 rounded-lg bg-white overflow-hidden flex items-center justify-center">
-                    <img src="Screenshot 2026-07-31 132146.png" alt="La'Seddi C & Co" class="project-img">
+        <!-- Projects -->
+        <section id="projects" class="py-12 reveal">
+            <div class="md:flex items-end justify-between gap-6">
+                <div>
+                    <h2 class="text-3xl font-extrabold mt-4">Projects</h2>
+                    <p class="mt-3 text-gray-600">A selection of software, web and mobile projects I have worked on.</p>
                 </div>
-                <h4 class="mt-4 font-semibold">La'Seddi C & Co</h4>
-                <p class="mt-2 text-sm text-gray-600">
-                    A restaurant website developed for a restaurant with multiple branches across Gauteng. The website allows customers to 
-                    perform various functions, including making reservations for events, viewing the restaurant menu, and accessing information 
-                    about the restaurant's branches, including their operating hours and addresses. The website also includes an administrative 
-                    portal that, among other functions, allows restaurant administrators to manage menu items and prices, as well as create and 
-                    update events and promotions. Built with HTML, CSS, JavaScript, MySQL.
-                </p>
-                <div class="mt-4 flex items-center gap-3">
-                    <a href="https://laseddi-c-and-co.onrender.com/" class="text-sm border px-3 py-1 rounded">Visit</a>
+                <div class="mt-5 md:mt-0 flex flex-wrap gap-2" id="projectFilters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web">Web</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile</button>
+                    <button class="filter-btn" data-filter="database">Database</button>
                 </div>
-            </article>
+            </div>
 
-            <article class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition">
-                <div class="h-36 rounded-lg bg-white overflow-hidden flex items-center justify-center">
-                    <img src="RITALogo.jpg" alt="RITA" class="project-img">
+            <div id="projectGrid" class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <article class="project-card project-item" data-category="web database">
+                    <div class="project-image-wrap"><img src="UH1.jpg" alt="Ubuntu Huis marketplace application" class="project-img"></div>
+                    <div class="project-body">
+                        <span class="project-tag">WEB · DATABASE</span>
+                        <h3 class="text-xl font-bold mt-3">Ubuntu Huis</h3>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">A marketplace platform for South Africa's informal economy with role-based access, product and service listings, and location and category filters.</p>
+                        <div class="mt-4 flex flex-wrap gap-1"><span class="skill-pill">PHP</span><span class="skill-pill">JavaScript</span><span class="skill-pill">MySQL</span></div>
+                        <a href="https://github.com/caffeine-and-chocolate/ubuntu-huis-website" target="_blank" rel="noopener noreferrer" class="project-link mt-5">View repository <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="project-card project-item" data-category="web database">
+                    <div class="project-image-wrap"><img src="Screenshot 2026-07-31 132146.png" alt="La'Seddi C and Co restaurant website" class="project-img"></div>
+                    <div class="project-body">
+                        <span class="project-tag">WEB · DATABASE</span>
+                        <h3 class="text-xl font-bold mt-3">La'Seddi C & Co</h3>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">A restaurant website for multiple Gauteng branches. Customers can make event reservations, view menus and branch information, while the administrative portal supports menu, event and promotion management.</p>
+                        <div class="mt-4 flex flex-wrap gap-1"><span class="skill-pill">HTML</span><span class="skill-pill">CSS</span><span class="skill-pill">JavaScript</span><span class="skill-pill">MySQL</span></div>
+                        <a href="https://laseddi-c-and-co.onrender.com/" target="_blank" rel="noopener noreferrer" class="project-link mt-5">View live project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="project-card project-item" data-category="mobile database">
+                    <div class="project-image-wrap"><img src="RITALogo.jpg" alt="RITA responsible intelligent tech assistant" class="project-img"></div>
+                    <div class="project-body">
+                        <span class="project-tag">MOBILE · SOFTWARE</span>
+                        <h3 class="text-xl font-bold mt-3">RITA</h3>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">An Android application designed to combine ethical AI use with learning how to code by providing guided hints rather than complete solutions.</p>
+                        <div class="mt-4 flex flex-wrap gap-1"><span class="skill-pill">Java</span><span class="skill-pill">Kotlin</span><span class="skill-pill">XML</span><span class="skill-pill">Firebase</span></div>
+                        <a href="https://drive.google.com/file/d/1-WzY7EP8vmYW0XxvzOvGZZSD0HERqIwB/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="project-link mt-5">View demo <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Journey / Education -->
+        <section id="journey" class="py-12 reveal">
+            <div class="grid lg:grid-cols-2 gap-6">
+                <article class="section-card p-7">
+                    <h2 class="text-3xl font-extrabold mt-4">Education & growth</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="text-xs font-bold pink-text">COMPLETED</span>
+                                <h3 class="font-bold mt-1">BSc Information Technology</h3>
+                                <p class="text-sm text-gray-500">Software Engineering · Eduvos · 2025</p>
+                                <p class="text-sm text-gray-600 mt-2">Built a foundation in programming, databases, software engineering, enterprise programming, mobile development and web technologies.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="text-xs font-bold pink-text">CURRENT</span>
+                                <h3 class="font-bold mt-1">BSc Honours in Information Technology</h3>
+                                <p class="text-sm text-gray-500">Software Engineering · Eduvos · Expected 2027</p>
+                                <p class="text-sm text-gray-600 mt-2">Currently developing deeper knowledge in microservices, backend technologies, research and computer graphics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="section-card p-7">
+                    <h2 class="text-3xl font-extrabold mt-4">Current focus</h2>
+                    <div class="mt-6 space-y-4">
+                        <div class="border border-purple-100 rounded-xl p-4">
+                            <div class="flex justify-between gap-3"><h3 class="font-bold">Service-oriented & microservices architectures</h3></div>
+                            <p class="text-sm text-gray-500 mt-2">Understanding how larger applications can be structured into focused, independently deployable services.</p>
+                        </div>
+                        <div class="border border-purple-100 rounded-xl p-4">
+                            <div class="flex justify-between gap-3"><h3 class="font-bold">Backend & web technologies</h3></div>
+                            <p class="text-sm text-gray-500 mt-2">Expanding practical experience across backend development, web applications and databases.</p>
+                        </div>
+                        <div class="border border-purple-100 rounded-xl p-4">
+                            <div class="flex justify-between gap-3"><h3 class="font-bold">Teaching & technical communication</h3></div>
+                            <p class="text-sm text-gray-500 mt-2">Assisting with university classes and supporting students with technical concepts.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="py-12 reveal">
+            <div class="section-card p-7 md:p-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold mt-4">Here's how you can contact me.</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">I am open to graduate software engineering roles, junior development opportunities, internships and academic/teaching opportunities.</p>
+                <div class="mt-7 flex flex-wrap justify-center gap-3">
+                    <a class="cta-secondary" href="mailto:chuenelesedi8@gmail.com"><i class="fas fa-envelope"></i> Email Me</a>
+                    <a class="cta-secondary" href="https://github.com/caffeine-and-chocolate" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                    <a class="cta-secondary" href="https://linkedin.com/in/lesedi-chuene" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
                 </div>
-                <h4 class="mt-4 font-semibold">RITA (Responsible Intelligent Tech Assistant)</h4>
-                <p class="mt-2 text-sm text-gray-600">
-                    Android mobile application that serves to combine ethical AI use with learning how to code. RITA promotes ethical AI use by 
-                    providing users with hints while coding without giving them the full code or solution to the activity they woud be working on. 
-                    Built using XML, Kotlin and Java. Project source code available upon request.
-                </p>
-                <div class="mt-4 flex items-center gap-3">
-                    <a href="https://drive.google.com/file/d/1-WzY7EP8vmYW0XxvzOvGZZSD0HERqIwB/view?usp=sharing" class="text-sm border px-3 py-1 rounded">Visit</a>
+
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <p class="text-sm text-gray-500">Also find me on <a class="pink-text font-semibold" href="https://letsnetworkitpeeps.blogspot.com/" target="_blank" rel="noopener noreferrer">Blogger</a>.</p>
                 </div>
-            </article>
-        </div>
-    </section>
+            </div>
+        </section>
+    </main>
 
-    <!-- Education -->
-    <section id="education" class="grid md:grid-cols-2 gap-6 py-8">
-        <div class="bg-white p-6 rounded-2xl shadow">
-            <h3 class="text-xl font-semibold" style="color:#f585fa;">Education</h3>
-            <p class="mt-3 text-gray-600">Bachelor of Science in Information Technology (Software Engineering)</p>
-            <p class="text-gray-600">Eduvos - Graduated 2026</p>
-            <ul class="mt-3 list-disc list-inside text-gray-600">
-                <li>Relevant modules: Internet Programming and e-Commerce, Database Systems, Mobile Application Development and Big Data, Enterprise Programming in Java</li>
-                <li>Final year project: Ubuntu Huis e-commerce website</li>
-            </ul>
-             <p class="mt-3 text-gray-600">Bachelor of Science Honours in Information Technology (Software Engineering)</p>
-            <p class="text-gray-600">Eduvos - Expected Graduation 2027</p>
-            <ul class="mt-3 list-disc list-inside text-gray-600">
-                <li>Relevant modules: Data Mining and Data Administration, Front-end and Backend Technologies and Frameworks, Embedded System Software Development</li>
-            </ul>
-        </div>
-    </section>
+    <footer class="mt-8 py-8 text-center text-sm text-gray-400">
+        <p>© <span id="year"></span> Lesedi Chuene · Software Engineering Portfolio</p>
+    </footer>
 
-    <!-- Contact -->
-    <section id="contact" class="py-8">
-        <div class="contact-box bg-white p-6 rounded-2xl shadow">
-            <h3 class="text-xl font-semibold" style="color:#f5aaf9;">Contact</h3>
-            <p class="mt-2 text-gray-600">I am open to internships, graduate roles, and industry opportunities.</p>
-            <h3 class="mt-4">Find me on:</h3>
-            <ul class="social">
-                <li><a href="https://linkedin.com/in/lesedi-chuene"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
-                <li><a href="https://github.com/caffeine-and-chocolate"><i class="fab fa-github"></i>GitHub</a></li>
-                <li><a href="mailto:chuenelesedi8@gmail.com"><i class="fas fa-envelope"></i>Email</a></li>
-                <li><a href="https://letsnetworkitpeeps.blogspot.com/"><i class="fab fa-blogger"></i>Blogger</a></li>
-            </ul>
-        </div>
-    </section>
+    <script>
+        // Current year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Mobile navigation
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileNav.classList.contains('hidden');
+            mobileNav.classList.toggle('hidden');
+            menuBtn.setAttribute('aria-expanded', String(!isOpen));
+            menuBtn.innerHTML = isOpen ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-xmark"></i>';
+        });
+
+        document.querySelectorAll('#mobileNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Reveal sections as they enter the viewport
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Project filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                projectItems.forEach(item => {
+                    const categories = item.dataset.category.split(' ');
+                    const show = filter === 'all' || categories.includes(filter);
+
+                    item.style.display = show ? '' : 'none';
+                    if (show) {
+                        item.animate([
+                            { opacity: 0, transform: 'translateY(12px)' },
+                            { opacity: 1, transform: 'translateY(0)' }
+                        ], { duration: 300, easing: 'ease-out' });
+                    }
+                });
+            });
+        });
+
+        // Highlight navigation link based on the section currently visible
+        const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
+        const sections = document.querySelectorAll('main section[id]');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const current = document.querySelector(`.desktop-nav .nav-link[href="#${entry.target.id}"]`);
+                    if (current) current.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-35% 0px -55% 0px' });
+
+        sections.forEach(section => sectionObserver.observe(section));
+    </script>
 </body>
 </html>
